@@ -7,6 +7,7 @@ from IPython import display
 from model import *
 from functions import *
 
+tf.keras.backend.clear_session()
 
 @tf.function
 def train_step(input_image, target, step):
@@ -39,9 +40,11 @@ def train_step(input_image, target, step):
 def fit(train_ds, steps, test_ds=None):
 
     start = time.time()
-    print('****************INJJAAA*****')
+    # print('****************INJJAAA*****')
+    # print(train_ds.repeat().take(steps).enumerate())
+    # print('tamum')
     for step, (input_image, target) in train_ds.repeat().take(steps).enumerate():
-        print('I COME')
+        # print('Step number: ', step)
         if (step) % 1000 == 0:
             display.clear_output(wait=True)
 
@@ -66,24 +69,27 @@ def fit(train_ds, steps, test_ds=None):
 
 
 # The facade training set consist of 400 images
-BUFFER_SIZE = 1281167
+BUFFER_SIZE = 256
 # The batch size of 1 produced better results for the U-Net in the original pix2pix experiment
-BATCH_SIZE = 128
+BATCH_SIZE = 16
 # Each image is 256x256 in size
 IMG_WIDTH = 256
 IMG_HEIGHT = 256
 OUTPUT_CHANNELS = 3
 
-PATH = '/localscratch/yasamin.27340825.0/train'
+PATH = '/localscratch/yasamin.27347390.0/train'
 
-train_dataset = tf.data.Dataset.list_files(PATH + '/*.JPEG')
-train_dataset = train_dataset.map(lambda x: tf.py_function(load_image_train, [x], [tf.string]),
-                                  num_parallel_calls=tf.data.AUTOTUNE)
-train_dataset = train_dataset.shuffle(BUFFER_SIZE)
-train_dataset = train_dataset.batch(BATCH_SIZE)
 
 generator = Generator()
 discriminator = Discriminator()
+
+train_dataset = tf.data.Dataset.list_files(PATH + '/*.JPEG')
+train_dataset = train_dataset.map(load_image_train, num_parallel_calls=tf.data.AUTOTUNE)
+# train_dataset = train_dataset.map(lambda x: tf.py_function(load_image_train, [x], [tf.string]),
+#                                   num_parallel_calls=tf.data.AUTOTUNE)
+train_dataset = train_dataset.shuffle(BUFFER_SIZE)
+train_dataset = train_dataset.batch(BATCH_SIZE)
+
 
 generator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
 discriminator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
@@ -97,4 +103,4 @@ log_dir = "logs/"
 summary_writer = tf.summary.create_file_writer(
   log_dir + "fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
 
-fit(train_dataset, steps=int(BUFFER_SIZE/BATCH_SIZE)*100)
+fit(train_dataset, steps=int(1281167/BATCH_SIZE)*100)
