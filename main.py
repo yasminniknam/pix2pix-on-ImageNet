@@ -77,7 +77,7 @@ IMG_WIDTH = 256
 IMG_HEIGHT = 256
 OUTPUT_CHANNELS = 3
 
-PATH = '/localscratch/yasamin.27347390.0/train'
+PATH = './train'
 
 
 generator = Generator()
