@@ -1,3 +1,4 @@
+from PIL import Image
 import tensorflow as tf
 from matplotlib import pyplot as plt
 
@@ -146,6 +147,8 @@ def generate_images(model, test_input, tar):
   display_list = [test_input[0], tar[0], prediction[0]]
   title = ['Input Image', 'Ground Truth', 'Predicted Image']
   
+  im = Image.fromarray(prediction[0])
+  im.save("your_file.jpeg")
   # for i in range(3):
   #   plt.subplot(1, 3, i+1)
   #   plt.title(title[i])
