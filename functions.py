@@ -91,9 +91,13 @@ def load_image_test(image_file):
   IMG_WIDTH = 256
   IMG_HEIGHT = 256
   input_image, real_image = load(image_file)
+  print(input_image.shape)
   # input_image = occlude(input_image)
   input_image, real_image = resize(input_image, real_image, IMG_HEIGHT, IMG_WIDTH)
+  print(input_image.shape)
   input_image, real_image = normalize(input_image, real_image)
+  print(input_image.shape)
+  print('***')
 
   return input_image, real_image
 
