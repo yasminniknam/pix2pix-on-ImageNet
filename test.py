@@ -31,4 +31,5 @@ checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
 
 # Run the trained model on a few examples from the test set
 for inp, tar in test_dataset:
-    generate_images(generator, inp, tar)
+    print(tf.expand_dims(inp, axis=0).shape)
+    generate_images(generator, tf.expand_dims(inp, axis=0).shape, tar)
