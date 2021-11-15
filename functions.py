@@ -13,8 +13,13 @@ def load(image_file):
   input_image = tf.cast(image, tf.float32)
   real_image = input_image
     
-  image_name = tf.py_function(numpy, image_file).decode('utf-8')
-  image_name = image_name.split('/')[-1][0:-4]
+  image_name = image_file.numpy()
+
+  print(image_name)
+  type(image_name)
+  print('^^^^')
+  # image_name = tf.py_function(numpy, image_file).decode('utf-8')
+  # image_name = image_name.split('/')[-1][0:-4]
   return input_image, real_image, image_name
 
 OUTPUT_CHANNEL=3
