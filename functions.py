@@ -1,6 +1,8 @@
 import numpy as np
 import tensorflow as tf
 
+def convert(img_file):
+  return img_file.numpy()
 
 def load(image_file):
   # Read and decode an image file to a uint8 tensor
@@ -12,8 +14,9 @@ def load(image_file):
   
   input_image = tf.cast(image, tf.float32)
   real_image = input_image
-    
-  image_name = image_file.numpy()
+   
+  image_name = tf.py_function(convert, inp=[image_file])  
+  # image_name = image_file.numpy()
 
   print(image_name)
   type(image_name)
