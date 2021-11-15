@@ -152,7 +152,7 @@ def generate_images(model, test_input, tar):
   image_output += 1
   image_output *= 127.5
   print(image_output)
-  im = Image.fromarray(image_output)
+  im = Image.fromarray(image_output.astype('uint8'), 'RGB')
   im.save("your_file.jpeg")
   # for i in range(3):
   #   plt.subplot(1, 3, i+1)
