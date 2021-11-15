@@ -31,5 +31,5 @@ checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer, discri
 checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
 
 # Run the trained model on a few examples from the test set
-for inp, tar in test_dataset.take(4):
-    generate_images(generator, inp, tar)
+for inp, tar, name in test_dataset.take(4):
+    generate_images(generator, inp, tar, name)
