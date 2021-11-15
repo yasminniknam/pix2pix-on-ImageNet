@@ -146,7 +146,7 @@ def generate_images(model, test_input, tar):
 
   display_list = [test_input[0], tar[0], prediction[0]]
   title = ['Input Image', 'Ground Truth', 'Predicted Image']
-  
+  print(prediction[0])
   im = Image.fromarray(prediction[0])
   im.save("your_file.jpeg")
   # for i in range(3):
