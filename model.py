@@ -140,7 +140,7 @@ def discriminator_loss(disc_real_output, disc_generated_output):
   return total_disc_loss
 
 
-def generate_images(model, test_input, tar):
+def generate_images(model, test_input, tar, name):
   prediction = model(test_input, training=True)
   # plt.figure(figsize=(15, 15))
 
@@ -158,6 +158,7 @@ def generate_images(model, test_input, tar):
   image_input += 1
   image_input *= 127.5
   im = Image.fromarray(image_input.astype('uint8'), 'RGB')
+  print(name)
   im.save("your_file_input.jpeg")
   # for i in range(3):
   #   plt.subplot(1, 3, i+1)
