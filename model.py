@@ -147,6 +147,7 @@ def generate_images(model, test_input, tar):
   display_list = [test_input[0], tar[0], prediction[0]]
   title = ['Input Image', 'Ground Truth', 'Predicted Image']
   print(prediction[0])
+  image_input = test_input[0].numpy()
   image_output = prediction[0].numpy()
   # input_image = (input_image / 127.5) - 1
   image_output += 1
@@ -154,6 +155,10 @@ def generate_images(model, test_input, tar):
   print(image_output)
   im = Image.fromarray(image_output.astype('uint8'), 'RGB')
   im.save("your_file.jpeg")
+  image_input += 1
+  image_input *= 127.5
+  im = Image.fromarray(image_input.astype('uint8'), 'RGB')
+  im.save("your_file_input.jpeg")
   # for i in range(3):
   #   plt.subplot(1, 3, i+1)
   #   plt.title(title[i])
