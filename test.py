@@ -15,7 +15,7 @@ OUTPUT_CHANNELS = 3
 generator = Generator()
 discriminator = Discriminator()
 
-PATH = './test'
+PATH = './val'
 test_dataset = tf.data.Dataset.list_files(PATH + '/*.JPEG')
 test_dataset = test_dataset.map(load_image_test, num_parallel_calls=tf.data.AUTOTUNE)
 
@@ -30,5 +30,5 @@ checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer, discri
 checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
 
 # Run the trained model on a few examples from the test set
-for inp, tar in test_dataset.take(1):
+for inp, tar in test_dataset.take(4):
     generate_images(generator, inp, tar)
