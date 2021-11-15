@@ -154,12 +154,12 @@ def generate_images(model, test_input, tar, name, addr):
   image_output *= 127.5
   
   im = Image.fromarray(image_output.astype('uint8'), 'RGB')
-  im.save(name+'_output.jpeg')
+  im.save(addr+'/'+name+'_output.jpeg')
   image_input += 1
   image_input *= 127.5
   im = Image.fromarray(image_input.astype('uint8'), 'RGB')
   #print(name)
-  im.save(name+'_input.jpeg')
+  im.save(addr+'/'+name+'_input.jpeg')
   # for i in range(3):
   #   plt.subplot(1, 3, i+1)
   #   plt.title(title[i])
