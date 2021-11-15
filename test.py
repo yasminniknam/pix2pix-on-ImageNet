@@ -6,7 +6,7 @@ tf.keras.backend.clear_session()
 
 BUFFER_SIZE = 256
 # The batch size of 1 produced better results for the U-Net in the original pix2pix experiment
-BATCH_SIZE = 16
+BATCH_SIZE = 1
 # Each image is 256x256 in size
 IMG_WIDTH = 256
 IMG_HEIGHT = 256
