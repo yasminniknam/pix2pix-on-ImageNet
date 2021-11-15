@@ -18,6 +18,7 @@ discriminator = Discriminator()
 PATH = './val'
 test_dataset = tf.data.Dataset.list_files(PATH + '/*.JPEG')
 test_dataset = test_dataset.map(load_image_test, num_parallel_calls=tf.data.AUTOTUNE)
+test_dataset = test_dataset.batch(BATCH_SIZE)
 
 generator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
 discriminator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
