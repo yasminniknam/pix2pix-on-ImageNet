@@ -29,6 +29,7 @@ checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer, discri
                                  generator=generator, discriminator=discriminator)
 
 checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
+addr = '/home/yasamin/scratch/pix2pix/pix2pix-on-ImageNet'
 
 # Run the trained model on a few examples from the test set
 for inp, tar, name in test_dataset.take(4):
@@ -36,4 +37,4 @@ for inp, tar, name in test_dataset.take(4):
     img_name = img_name[6:-5]
     img_name = img_name.decode("utf-8")
     print(img_name)
-    generate_images(generator, inp, tar, img_name)
+    generate_images(generator, inp, tar, img_name, addr)
