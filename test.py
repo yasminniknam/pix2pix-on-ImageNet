@@ -32,6 +32,8 @@ checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
 
 # Run the trained model on a few examples from the test set
 for inp, tar, name in test_dataset.take(4):
-    img_name = name.numpy()[6:-4]
+    img_name = name.numpy()[0]
+    imgggg = img_name[6:-4]
     print(img_name)
+    print(imgggg)
     generate_images(generator, inp, tar, img_name)
