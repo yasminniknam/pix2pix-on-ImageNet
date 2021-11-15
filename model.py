@@ -147,11 +147,12 @@ def generate_images(model, test_input, tar):
   display_list = [test_input[0], tar[0], prediction[0]]
   title = ['Input Image', 'Ground Truth', 'Predicted Image']
   print(prediction[0])
+  image_output = prediction[0].numpy()
   # input_image = (input_image / 127.5) - 1
-  prediction[0] += 1
-  prediction[0] *= 127.5
-  print(prediction[0])
-  im = Image.fromarray(prediction[0].numpy())
+  image_output += 1
+  image_output *= 127.5
+  print(image_output)
+  im = Image.fromarray(image_output)
   im.save("your_file.jpeg")
   # for i in range(3):
   #   plt.subplot(1, 3, i+1)
