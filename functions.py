@@ -13,7 +13,7 @@ def load(image_file):
   input_image = tf.cast(image, tf.float32)
   real_image = input_image
   # print(tf.shape(input_image), '^^^^^^^^^^')
-  return input_image, real_image
+  return input_image, real_image, image_file
 
 OUTPUT_CHANNEL=3
 def resize(input_image, real_image, height, width):
@@ -80,7 +80,7 @@ def random_jitter(input_image, real_image):
 
 def load_image_train(image_file):
 
-  input_image, real_image = load(image_file)
+  input_image, real_image, _ = load(image_file)
   input_image, real_image = random_jitter(input_image, real_image)
   input_image, real_image = normalize(input_image, real_image)
 
@@ -90,7 +90,7 @@ def load_image_train(image_file):
 def load_image_test(image_file):
   IMG_WIDTH = 256
   IMG_HEIGHT = 256
-  input_image, real_image = load(image_file)
+  input_image, real_image, image_name = load(image_file)
   print(input_image.shape)
   # input_image = occlude(input_image)
   input_image, real_image = resize(input_image, real_image, IMG_HEIGHT, IMG_WIDTH)
@@ -99,5 +99,5 @@ def load_image_test(image_file):
   print(input_image.shape)
   print('***')
 
-  return input_image, real_image
+  return input_image, real_image, image_name
 
