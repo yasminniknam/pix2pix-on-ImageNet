@@ -9,11 +9,13 @@ def load(image_file):
   image = tf.io.read_file(image_file)
   image = tf.image.decode_jpeg(image, channels=3)
 
-  # Convert both images to float32 tensors
+  
   input_image = tf.cast(image, tf.float32)
   real_image = input_image
-  # print(tf.shape(input_image), '^^^^^^^^^^')
-  return input_image, real_image, image_file
+    
+  image_name = tf.py_function(numpy, image_file).decode('utf-8')
+  image_name = image_name.split('/')[-1][0:-4]
+  return input_image, real_image, image_name
 
 OUTPUT_CHANNEL=3
 def resize(input_image, real_image, height, width):
