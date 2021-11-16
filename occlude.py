@@ -19,7 +19,7 @@ img_transform = transforms.Compose([transforms.ToTensor(),])
 
 addr='./val'
 
-imageset = datasets.ImageFolder(root=data_addr,  transform=img_transform)
+imageset = datasets.ImageFolder(root=addr,  transform=img_transform)
 print(imageset.imgs)
 #filenames= [imageset.imgs[i][0][-7:-4] for i in range(len(imageset.imgs)) ]
 #dataloader = torch.utils.data.DataLoader(imageset,batch_size=1,shuffle=False, num_workers=8)
