@@ -20,8 +20,9 @@ img_transform = transforms.Compose([transforms.ToTensor(),])
 addr='./vall'
 
 imageset = datasets.ImageFolder(root=addr,  transform=img_transform)
-print(imageset.imgs)
-#filenames= [imageset.imgs[i][0][-7:-4] for i in range(len(imageset.imgs)) ]
+
+filenames= [imageset.imgs[i][0][10:-4] for i in range(len(imageset.imgs)) ]
+print(filenames)
 #dataloader = torch.utils.data.DataLoader(imageset,batch_size=1,shuffle=False, num_workers=8)
 #save_path = '/home/yasamin/scratch/pix2pix/pix2pix-on-ImageNet/results/occluded_input'
 #os.makedirs(save_path, exist_ok=True)
