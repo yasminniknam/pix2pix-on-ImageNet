@@ -61,13 +61,16 @@ def normalize(input_image, real_image):
 
   return input_image, real_image
 
-
 def occlude(image):
+  
   occlusion_size = np.random.randint(30, 50)
-  mask = tf.zeros((occlusion_size, occlusion_size, 3), tf.float32)
+  mask = np.zeros((occlusion_size, occlusion_size, 3))
+  new_img=image.numpy()
   random = np.random.randint(0, 200)
-  image[random:occlusion_size + random, random:occlusion_size + random, :] = mask
-  return image
+  new_img[random:occlusion_size + random, random:occlusion_size + random, :] = mask
+  out_img = tf.convert_to_tensor(new_img, dtype=tf.float32)
+  
+  return out_img
 
 
 @tf.function()
