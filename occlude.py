@@ -17,7 +17,7 @@ def occlude(image):
 
 img_transform = transforms.Compose([transforms.ToTensor(),])
 
-addr='./val'
+addr='./vall'
 
 imageset = datasets.ImageFolder(root=addr,  transform=img_transform)
 print(imageset.imgs)
