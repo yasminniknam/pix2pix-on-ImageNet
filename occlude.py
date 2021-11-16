@@ -10,11 +10,11 @@ def occlude(image):
     print(image.shape)
     print('***')
     size = np.random.randint(30, 50)
-    mask = np.zeros((size, size, 3))
+    mask = np.zeros((3, size, size))
     random = np.random.randint(0,200)
     new_mask = torch.from_numpy(mask)
     # print(image[0, :, random:100+random, random:100+random])
-    image[random:size+random, random:size+random, :] = new_mask
+    image[0, :, random:size+random, random:size+random] = new_mask
     # print(image[0, :, random:100+random, random:100+random])
     return image
 
