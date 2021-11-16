@@ -144,8 +144,8 @@ def generate_images(model, test_input, tar, name, addr):
   prediction = model(test_input, training=True)
   # plt.figure(figsize=(15, 15))
 
-  display_list = [test_input[0], tar[0], prediction[0]]
-  title = ['Input Image', 'Ground Truth', 'Predicted Image']
+  # display_list = [test_input[0], tar[0], prediction[0]]
+  # title = ['Input Image', 'Ground Truth', 'Predicted Image']
   
   image_input = test_input[0].numpy()
   image_output = prediction[0].numpy()
@@ -154,12 +154,13 @@ def generate_images(model, test_input, tar, name, addr):
   image_output *= 127.5
   
   im = Image.fromarray(image_output.astype('uint8'), 'RGB')
-  im.save(addr+'/'+name+'_output.jpeg')
+  im.save(addr+'/'+name+'.jpeg')
   image_input += 1
   image_input *= 127.5
   im = Image.fromarray(image_input.astype('uint8'), 'RGB')
   #print(name)
-  im.save(addr+'/'+name+'_input.jpeg')
+  input_img_addr = '/home/yasamin/scratch/pix2pix/pix2pix-on-ImageNet/results/non_occluded_model/data'
+  im.save(input_img_addr+'/'+name+'.jpeg')
   # for i in range(3):
   #   plt.subplot(1, 3, i+1)
   #   plt.title(title[i])
