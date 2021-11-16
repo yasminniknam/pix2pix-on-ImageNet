@@ -13,7 +13,8 @@ def occlude(image):
         size = 30
         random = np.random.randint(0, 100)
         if image.shape[2] < 100 or image.shape[3] < 100:
-            random = np.random.randint(0, 80)
+            size = 20
+            random = np.random.randint(0, 50)
     else:
         size = np.random.randint(30, 50)
         random = np.random.randint(0, 150)
