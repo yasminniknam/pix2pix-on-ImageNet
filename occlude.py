@@ -8,6 +8,8 @@ import torchvision.transforms as transforms
 def occlude(image):
     print('***')
     print(image.shape)
+    print(image.shape[1])
+    print(image.shape[2])
     print('***')
     size = np.random.randint(30, 50)
     mask = np.zeros((3, size, size))
