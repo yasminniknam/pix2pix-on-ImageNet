@@ -6,6 +6,9 @@ from torchvision.utils import save_image
 import torchvision.transforms as transforms
 
 def occlude(image):
+    print('***')
+    print(image.shape)
+    print('***')
     size = np.random.randint(30, 50)
     mask = np.zeros((size, size, 3))
     random = np.random.randint(0,200)
