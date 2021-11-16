@@ -9,10 +9,10 @@ def occlude(image):
     print('***')
     print(image.shape)
     print('***')
-    if image.shape[2] < 200 or image.shape[3] < 200:
+    if image.shape[2] <= 200 or image.shape[3] <= 200:
         size = 30
         random = np.random.randint(0, 100)
-        if image.shape[2] < 100 or image.shape[3] < 100:
+        if image.shape[2] <= 100 or image.shape[3] <= 100:
             size = 20
             random = np.random.randint(0, 50)
     else:
