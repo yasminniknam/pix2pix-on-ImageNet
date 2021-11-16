@@ -23,7 +23,7 @@ imageset = datasets.ImageFolder(root=data_addr,  transform=img_transform)
 print(imageset.imgs)
 #filenames= [imageset.imgs[i][0][-7:-4] for i in range(len(imageset.imgs)) ]
 #dataloader = torch.utils.data.DataLoader(imageset,batch_size=1,shuffle=False, num_workers=8)
-#save_path = os.path.join(addr, 'image_occluded_reconstruction/occlude')
+#save_path = '/home/yasamin/scratch/pix2pix/pix2pix-on-ImageNet/results/occluded_input'
 #os.makedirs(save_path, exist_ok=True)
 #for idx, (img, y) in enumerate(dataloader):
 #    if idx == 0:
@@ -31,6 +31,6 @@ print(imageset.imgs)
 #        print(idx)
 #        print(img.shape)
 #    new_img = occlude(img)
-#    save_image(new_img, os.path.join(save_path, filenames[idx] + '.png'), nrow=8, normalize=True)
+#    save_image(new_img, os.path.join(save_path, filenames[idx] + '.jpeg'), nrow=8, normalize=True)
     # break
 
