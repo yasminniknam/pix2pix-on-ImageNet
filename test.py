@@ -29,10 +29,11 @@ checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer, discri
                                  generator=generator, discriminator=discriminator)
 
 checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
-addr = '/home/yasamin/scratch/pix2pix/pix2pix-on-ImageNet/results/non_occluded_model/output_occluded_input'
+addr = './val'
+# addr = '/home/yasamin/scratch/pix2pix/pix2pix-on-ImageNet/results/non_occluded_model/output_occluded_input'
 
 # Run the trained model on a few examples from the test set
-for inp, tar, name in test_dataset:
+for inp, tar, name in test_dataset.take(2):
     img_name = name.numpy()[0]
     img_name = img_name[6:-5]
     img_name = img_name.decode("utf-8")
