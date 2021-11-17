@@ -23,7 +23,7 @@ test_dataset = test_dataset.batch(BATCH_SIZE)
 generator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
 discriminator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
 
-checkpoint_dir = '/home/yasamin/scratch/pix2pix/pix2pix-on-ImageNet/training_checkpoints'
+checkpoint_dir = '/home/yasamin/scratch/pix2pix/models/non_occluded/training_checkpoints'
 checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
 checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer, discriminator_optimizer=discriminator_optimizer,
                                  generator=generator, discriminator=discriminator)
