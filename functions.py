@@ -93,6 +93,7 @@ def load_image_train(image_file):
 
   input_image, real_image, _ = load(image_file)
   input_image, real_image = random_jitter(input_image, real_image)
+  input_image = occlude(input_image)
   input_image, real_image = normalize(input_image, real_image)
 
   return input_image, real_image
