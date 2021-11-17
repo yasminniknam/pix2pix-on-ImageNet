@@ -1,6 +1,6 @@
 import numpy as np
 import tensorflow as tf
-
+import tensorflow_addons as tfa
 #def convert(img_file):
 #  return img_file.numpy()
 
@@ -63,14 +63,12 @@ def normalize(input_image, real_image):
 
 def occlude(image):
   
-  occlusion_size = np.random.randint(30, 50)
-  mask = np.zeros((occlusion_size, occlusion_size, 3))
-  new_img=image.numpy()
-  random = np.random.randint(0, 200)
-  new_img[random:occlusion_size + random, random:occlusion_size + random, :] = mask
-  out_img = tf.convert_to_tensor(new_img, dtype=tf.float32)
+  image = tf.expand_dims(image, 0)
+  cutout_image = tfa.image.random_cutout(image, (70,70), constant_values = 0)
   
-  return out_img
+  cutout_image = tf.squeeze(cutout_image, 0)
+  
+  return cutout_image
 
 
 @tf.function()
@@ -104,10 +102,8 @@ def load_image_test(image_file):
   IMG_WIDTH = 256
   IMG_HEIGHT = 256
   input_image, real_image, image_name = load(image_file)
-  print(input_image.shape)
-  input_image = occlude(input_image)
   input_image, real_image = resize(input_image, real_image, IMG_HEIGHT, IMG_WIDTH)
-  print(input_image.shape)
+  input_image = occlude(input_image)
   input_image, real_image = normalize(input_image, real_image)
   print(input_image.shape)
   print('***')
