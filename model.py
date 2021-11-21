@@ -159,7 +159,7 @@ def generate_images(model, test_input, tar, name, addr):
   image_input *= 127.5
   im = Image.fromarray(image_input.astype('uint8'), 'RGB')
   #print(name)
-  input_img_addr = '/home/yasamin/scratch/pix2pix/pix2pix-on-ImageNet/results/non_occluded_model/data'
+  input_img_addr = '/home/yasamin/scratch/pix2pix/pix2pix-on-ImageNet/results/occluded_model/data'
   im.save(input_img_addr+'/'+name+'.jpeg')
   # for i in range(3):
   #   plt.subplot(1, 3, i+1)
