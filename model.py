@@ -43,7 +43,7 @@ def upsample(filters, size, apply_dropout=False):
 
 
 def Generator():
-  inputs = tf.keras.layers.Input(shape=[256, 256, 3])
+  inputs = tf.keras.layers.Input(shape=[128, 128, 3])
 
   down_stack = [
     downsample(64, 4, apply_batchnorm=False),  # (batch_size, 128, 128, 64)
@@ -104,8 +104,8 @@ def generator_loss(disc_generated_output, gen_output, target):
 def Discriminator():
   initializer = tf.random_normal_initializer(0., 0.02)
 
-  inp = tf.keras.layers.Input(shape=[256, 256, 3], name='input_image')
-  tar = tf.keras.layers.Input(shape=[256, 256, 3], name='target_image')
+  inp = tf.keras.layers.Input(shape=[128, 128, 3], name='input_image')
+  tar = tf.keras.layers.Input(shape=[128, 128, 3], name='target_image')
 
   x = tf.keras.layers.concatenate([inp, tar])  # (batch_size, 256, 256, channels*2)
 
