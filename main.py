@@ -73,8 +73,8 @@ BUFFER_SIZE = 256
 # The batch size of 1 produced better results for the U-Net in the original pix2pix experiment
 BATCH_SIZE = 16
 # Each image is 256x256 in size
-IMG_WIDTH = 256
-IMG_HEIGHT = 256
+IMG_WIDTH = 128
+IMG_HEIGHT = 128
 OUTPUT_CHANNELS = 3
 
 PATH = './train'
@@ -94,12 +94,12 @@ train_dataset = train_dataset.batch(BATCH_SIZE)
 generator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
 discriminator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
 
-checkpoint_dir = '/home/yasamin/scratch/pix2pix/pix2pix-on-ImageNet/training_checkpoints'
+checkpoint_dir = '/home/yasamin/scratch/pix2pix/pix2pix-on-coco/pix2pix-on-ImageNet/training_checkpoints'
 checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
 checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer, discriminator_optimizer=discriminator_optimizer,
                                  generator=generator, discriminator=discriminator)
 
-log_dir = "/home/yasamin/scratch/pix2pix/pix2pix-on-ImageNet/logs/"
+log_dir = "/home/yasamin/scratch/pix2pix/pix2pix-on-coco/pix2pix-on-ImageNet/logs/"
 summary_writer = tf.summary.create_file_writer(
   log_dir + "fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
 
