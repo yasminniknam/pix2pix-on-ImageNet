@@ -1,6 +1,8 @@
 import numpy as np
 import tensorflow as tf
-
+import tensorflow_addons as tfa
+#def convert(img_file):
+#  return img_file.numpy()
 
 def load(image_file):
   # Read and decode an image file to a uint8 tensor
@@ -9,11 +11,19 @@ def load(image_file):
   image = tf.io.read_file(image_file)
   image = tf.image.decode_jpeg(image, channels=3)
 
-  # Convert both images to float32 tensors
+  
   input_image = tf.cast(image, tf.float32)
   real_image = input_image
-  # print(tf.shape(input_image), '^^^^^^^^^^')
-  return input_image, real_image
+   
+  # image_name = tf.py_function(convert, inp=[image_file])  
+  # image_name = image_file.numpy()
+
+  # print(image_name)
+  # type(image_name)
+  # print('^^^^')
+  # image_name = tf.py_function(numpy, image_file).decode('utf-8')
+  # image_name = image_name.split('/')[-1][0:-4]
+  return input_image, real_image, image_file
 
 OUTPUT_CHANNEL=3
 def resize(input_image, real_image, height, width):
@@ -26,8 +36,8 @@ def resize(input_image, real_image, height, width):
 
 
 def random_crop(input_image, real_image):
-  IMG_WIDTH = 256
-  IMG_HEIGHT = 256
+  IMG_WIDTH = 128
+  IMG_HEIGHT = 128
   # print(input_image.shape, '&&&&&&&&')
 
   try:
@@ -51,20 +61,21 @@ def normalize(input_image, real_image):
 
   return input_image, real_image
 
-
 def occlude(image):
-  occlusion_size = np.random.randint(30, 50)
-  mask = np.zeros((occlusion_size, occlusion_size, 3))
-  random = np.random.randint(0, 200)
-  image[random:occlusion_size + random, random:occlusion_size + random, :] = mask
-  return image
+  
+  image = tf.expand_dims(image, 0)
+  cutout_image = tfa.image.random_cutout(image, (20,20), constant_values = 0)
+  
+  cutout_image = tf.squeeze(cutout_image, 0)
+  
+  return cutout_image
 
 
 @tf.function()
 def random_jitter(input_image, real_image):
 
   # Resizing to 286x286
-  input_image, real_image = resize(input_image, real_image, 286, 286)
+  input_image, real_image = resize(input_image, real_image, 180, 180)
   # print('###' , tf.shape(input_image))
   # print('###' , input_image.shape)
   # Random cropping back to 256x256
@@ -80,24 +91,23 @@ def random_jitter(input_image, real_image):
 
 def load_image_train(image_file):
 
-  input_image, real_image = load(image_file)
+  input_image, real_image, _ = load(image_file)
   input_image, real_image = random_jitter(input_image, real_image)
+  input_image = occlude(input_image)
   input_image, real_image = normalize(input_image, real_image)
 
   return input_image, real_image
 
 
 def load_image_test(image_file):
-  IMG_WIDTH = 256
-  IMG_HEIGHT = 256
-  input_image, real_image = load(image_file)
-  print(input_image.shape)
-  # input_image = occlude(input_image)
+  IMG_WIDTH = 128
+  IMG_HEIGHT = 128
+  input_image, real_image, image_name = load(image_file)
   input_image, real_image = resize(input_image, real_image, IMG_HEIGHT, IMG_WIDTH)
-  print(input_image.shape)
+  input_image = occlude(input_image)
   input_image, real_image = normalize(input_image, real_image)
   print(input_image.shape)
   print('***')
 
-  return input_image, real_image
+  return input_image, real_image, image_name
 
