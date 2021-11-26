@@ -53,11 +53,11 @@ def Generator():
     downsample(512, 4),  # (batch_size, 8, 8, 512)
     downsample(512, 4),  # (batch_size, 4, 4, 512)
     downsample(512, 4),  # (batch_size, 2, 2, 512)
-    downsample(512, 4),  # (batch_size, 1, 1, 512)
+    # downsample(512, 4),  # (batch_size, 1, 1, 512)
   ]
 
   up_stack = [
-    upsample(512, 4, apply_dropout=True),  # (batch_size, 2, 2, 1024)
+    # upsample(512, 4, apply_dropout=True),  # (batch_size, 2, 2, 1024)
     upsample(512, 4, apply_dropout=True),  # (batch_size, 4, 4, 1024)
     upsample(512, 4, apply_dropout=True),  # (batch_size, 8, 8, 1024)
     upsample(512, 4),  # (batch_size, 16, 16, 1024)
@@ -67,8 +67,11 @@ def Generator():
   ]
 
   initializer = tf.random_normal_initializer(0., 0.02)
-  last = tf.keras.layers.Conv2DTranspose(OUTPUT_CHANNELS, 4, strides=2, padding='same', kernel_initializer=initializer, activation='tanh')
-  # (batch_size, 256, 256, 3)
+  last = tf.keras.layers.Conv2DTranspose(OUTPUT_CHANNELS, 4,
+                                         strides=2,
+                                         padding='same',
+                                         kernel_initializer=initializer,
+                                         activation='tanh')  # (batch_size, 256, 256, 3)
 
   x = inputs
 
@@ -159,7 +162,7 @@ def generate_images(model, test_input, tar, name, addr):
   image_input *= 127.5
   im = Image.fromarray(image_input.astype('uint8'), 'RGB')
   #print(name)
-  input_img_addr = '/home/yasamin/scratch/pix2pix/pix2pix-on-ImageNet/results/occluded_model/data'
+  input_img_addr = '/home/yasamin/scratch/pix2pix/pix2pix-on-coco/pix2pix-on-ImageNet/results/occluded_model/data'
   im.save(input_img_addr+'/'+name+'.jpeg')
   # for i in range(3):
   #   plt.subplot(1, 3, i+1)
