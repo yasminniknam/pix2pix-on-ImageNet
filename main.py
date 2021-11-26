@@ -77,13 +77,13 @@ IMG_WIDTH = 128
 IMG_HEIGHT = 128
 OUTPUT_CHANNELS = 3
 
-PATH = './train'
+PATH = './train2017'
 
 
 generator = Generator()
 discriminator = Discriminator()
 
-train_dataset = tf.data.Dataset.list_files(PATH + '/*.JPEG')
+train_dataset = tf.data.Dataset.list_files(PATH + '/*.jpg')
 train_dataset = train_dataset.map(load_image_train, num_parallel_calls=tf.data.AUTOTUNE)
 # train_dataset = train_dataset.map(lambda x: tf.py_function(load_image_train, [x], [tf.string]),
 #                                   num_parallel_calls=tf.data.AUTOTUNE)
@@ -103,4 +103,4 @@ log_dir = "/home/yasamin/scratch/pix2pix/pix2pix-on-coco/pix2pix-on-ImageNet/log
 summary_writer = tf.summary.create_file_writer(
   log_dir + "fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
 
-fit(train_dataset, steps=int(1281167/BATCH_SIZE)*100)
+fit(train_dataset, steps=int(118287/BATCH_SIZE)*100)
