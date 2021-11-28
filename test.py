@@ -38,4 +38,4 @@ for inp, tar, name in test_dataset:
     img_name = img_name[6:-5]
     img_name = img_name.decode("utf-8")
     print(img_name)
-    #generate_images(generator, inp, tar, img_name, addr)
+    generate_images(generator, inp, tar, img_name, addr)
