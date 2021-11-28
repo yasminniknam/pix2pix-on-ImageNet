@@ -35,7 +35,7 @@ addr = '/home/yasamin/scratch/pix2pix/pix2pix-on-coco/pix2pix-on-ImageNet/result
 # Run the trained model on a few examples from the test set
 for inp, tar, name in test_dataset:
     img_name = name.numpy()[0]
-    img_name = img_name[10:-3]
+    img_name = img_name[10:-4]
     img_name = img_name.decode("utf-8")
     print(img_name)
-    #generate_images(generator, inp, tar, img_name, addr)
+    generate_images(generator, inp, tar, img_name, addr)
